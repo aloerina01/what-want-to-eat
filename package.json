@@ -1,0 +1,35 @@
+{
+  "name": "what-want-to-eat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aloerina01/what-want-to-eat.git"
+  },
+  "author": "aloerina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aloerina01/what-want-to-eat/issues"
+  },
+  "homepage": "https://github.com/aloerina01/what-want-to-eat#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.0",
+    "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
