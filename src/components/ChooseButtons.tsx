@@ -24,13 +24,14 @@ export const ChooseButtons: React.FC = () => (
     <button
       style={{
         ...ButtonStyle,
-        border: '2px solid #00e676',
-        backgroundColor: '#00e676',
+        border: '2px solid #4CAF50',
+        backgroundColor: '#4CAF50',
+        color: '#fff',
         marginRight: '10px',
       }}
     >
       食べたい！
     </button>
-    <button style={{ ...ButtonStyle, border: '2px solid #00e676' }}>不要！</button>
+    <button style={{ ...ButtonStyle, border: '2px solid #4CAF50' }}>不要！</button>
   </div>
 );

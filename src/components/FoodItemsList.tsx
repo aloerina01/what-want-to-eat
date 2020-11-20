@@ -11,15 +11,16 @@ const ulStyle: React.CSSProperties = {
   alignItems: 'center',
   flexWrap: 'wrap',
   listStyle: 'none',
-  height: 'calc(100vh - 100px)',
+  height: 'calc(100vh - 152px)', // header 52px, footer 100px
   overflowY: 'scroll',
+  padding: '8px',
 };
 
 const liStyle: React.CSSProperties = {
   display: 'inline-flex',
   flexDirection: 'column',
   width: '26%',
-  margin: '12px 3%',
+  margin: '12px 3.6%',
 };
 
 const itemImageAreaStyle: React.CSSProperties = {
@@ -27,7 +28,7 @@ const itemImageAreaStyle: React.CSSProperties = {
   paddingTop: '100%',
   position: 'relative',
   borderRadius: '50%',
-  border: '1px solid #e8e8e8',
+  border: '1px solid #eee',
 };
 
 const itemImageStyle: React.CSSProperties = {
@@ -52,6 +53,8 @@ const itemIconStyle: React.CSSProperties = {
 const itemLabelStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#333',
+  fontSize: '0.85rem',
+  paddingTop: '4px',
 };
 
 export const FoodItemsList: React.FC<FoodItemsListProps> = ({ foodItems, onClickFoodItem }) => {
@@ -61,7 +64,8 @@ export const FoodItemsList: React.FC<FoodItemsListProps> = ({ foodItems, onClick
         {foodItems.map((item, index) => {
           const choosedImageAreaStyle = {
             ...itemImageAreaStyle,
-            backgroundColor: item.choosed ? '#f2fde4' : '#fff',
+            backgroundColor: item.choosed ? '#C8E6C9' : '#fff',
+            borderColor: item.choosed ? '#C8E6C9' : '#eee',
           };
           return (
             <li key={`${index}_foodItem`} style={liStyle} onClick={() => onClickFoodItem(item.id)}>
@@ -80,7 +84,7 @@ export const FoodItemsList: React.FC<FoodItemsListProps> = ({ foodItems, onClick
         })}
         <li style={liStyle}>
           <div className="item-image-area" style={itemImageAreaStyle}>
-            <p style={itemIconStyle}>➕</p>
+            <p style={{ ...itemIconStyle, color: '#757575' }}>＋</p>
           </div>
           <div className="item-label" style={itemLabelStyle}>
             追加

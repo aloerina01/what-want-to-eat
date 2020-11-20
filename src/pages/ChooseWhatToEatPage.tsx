@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { choosedFoodItemIdsState, currentFoodItemsState } from '../states';
+import { PageHeader } from '../components/PageHeader';
 import { FoodItemsList } from '../components/FoodItemsList';
 import { ChooseButtons } from '../components/ChooseButtons';
 
@@ -17,6 +18,7 @@ export const ChooseWhatToEatPage: React.FC = () => {
   };
   return (
     <div>
+      <PageHeader title="何食べたい？" />
       <FoodItemsList foodItems={foodItems} onClickFoodItem={onClickFoodItem} />
       <ChooseButtons />
     </div>
