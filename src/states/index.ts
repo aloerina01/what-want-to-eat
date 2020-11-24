@@ -1,6 +1,5 @@
-import { masterFoodItemsState, FoodItem } from './masterFoodItemsState';
+import { masterFoodItemsState } from './masterFoodItemsState';
 import { choosedFoodItemIdsState } from './choosedFoodItemIdsState';
-import { currentFoodItemsState, CurrentFoodItem } from './currentFoodItemsState';
+import { currentFoodItemsState } from './currentFoodItemsState';
 
 export { masterFoodItemsState, choosedFoodItemIdsState, currentFoodItemsState };
-export type { FoodItem, CurrentFoodItem };

@@ -1,13 +1,11 @@
 import { selector } from 'recoil';
 import { masterFoodItemsState, choosedFoodItemIdsState } from '.';
-import { FoodItem } from './masterFoodItemsState';
-
-export type CurrentFoodItem = FoodItem & { choosed: boolean };
+import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 
 /**
  * masterFoodItemsStateとchoosedFoodItemIdsStateを突き合わせて、「選択中か否か」の情報をもたせたもの
  */
-export const currentFoodItemsState = selector<CurrentFoodItem[]>({
+export const currentFoodItemsState = selector<ICurrentFoodItem[]>({
   key: 'currentFoodItemsState',
   get: ({ get }) =>
     get(masterFoodItemsState).map((item) => {

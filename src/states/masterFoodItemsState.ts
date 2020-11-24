@@ -1,13 +1,7 @@
 import { atom } from 'recoil';
+import { IFoodItem } from '../models/IFoodItem';
 
-export type FoodItem = {
-  id: string;
-  name: string;
-  icon?: string;
-  image?: string;
-};
-
-export const masterFoodItemsState = atom<FoodItem[]>({
+export const masterFoodItemsState = atom<IFoodItem[]>({
   key: 'masterFoodItemsStateState',
   default: [
     { id: '1', name: '肉', icon: '🍖' },
