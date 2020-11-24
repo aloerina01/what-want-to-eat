@@ -1,4 +1,8 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { masterFoodItemsState } from '../states';
+import { useSubmissionWantToEat } from '../hooks/useSubmissionWantToEat';
+import { useRecoilValue } from 'recoil';
 
 const ButtonsAreaStyle: React.CSSProperties = {
   display: 'flex',
@@ -19,19 +23,27 @@ const ButtonStyle: React.CSSProperties = {
   fontWeight: 800,
 };
 
-export const ChooseButtons: React.FC = () => (
-  <div style={ButtonsAreaStyle}>
-    <button
-      style={{
-        ...ButtonStyle,
-        border: '2px solid #4CAF50',
-        backgroundColor: '#4CAF50',
-        color: '#fff',
-        marginRight: '10px',
-      }}
-    >
-      食べたい！
-    </button>
-    <button style={{ ...ButtonStyle, border: '2px solid #4CAF50' }}>不要！</button>
-  </div>
-);
+// type ChooseButtonsProps = {
+//   onClickWantToEat: () => void;
+// };
+
+export const ChooseButtons: React.FC = () => {
+  const submitWantToEat = useSubmissionWantToEat();
+  return (
+    <div style={ButtonsAreaStyle}>
+      <button
+        onClick={submitWantToEat}
+        style={{
+          ...ButtonStyle,
+          border: '2px solid #4CAF50',
+          backgroundColor: '#4CAF50',
+          color: '#fff',
+          marginRight: '10px',
+        }}
+      >
+        食べたい！
+      </button>
+      <button style={{ ...ButtonStyle, border: '2px solid #4CAF50' }}>不要！</button>
+    </div>
+  );
+};
