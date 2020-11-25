@@ -2,6 +2,7 @@ import { selector } from 'recoil';
 import { masterFoodItemsState, choosedFoodItemIdsState } from '.';
 import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 import { getDecodedIDToken } from '../liff';
+import { IChoosedFoodItemIdsRepo } from '../repositories/choosedFoodItemIdsRepo';
 
 const token = getDecodedIDToken();
 

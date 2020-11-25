@@ -13,12 +13,17 @@ export const choosedFoodItemIdsRepo: IChoosedFoodItemIdsRepo = {
     return choosedFoodItemIdsRef.doc(data.id).set(data);
   },
   get: async (date) => {
-    const snapshot = await choosedFoodItemIdsRef.where('date', '==', date).get();
-    return snapshot.docs.map((doc) => ({
-      id: doc.id,
-      userId: doc.data().userId,
-      date: doc.data().date,
-      itemIds: doc.data().itemIds,
-    }));
+    const choosedFoodItemIds: IChoosedFoodItemId[] = [];
+    await choosedFoodItemIdsRef.where('date', '==', date).onSnapshot((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        choosedFoodItemIds.push({
+          id: doc.id,
+          userId: doc.data().userId,
+          date: doc.data().date,
+          itemIds: doc.data().itemIds,
+        });
+      });
+    });
+    return choosedFoodItemIds;
   },
 };

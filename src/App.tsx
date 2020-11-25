@@ -14,7 +14,10 @@ export const App: React.FC = () => (
         </Suspense>
       </Route>
       <Route path="/choosedResult">
-        <ChoosedResultPage />
+        <PageHeader title="今日何食べたい？" />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ChoosedResultPage />
+        </Suspense>
       </Route>
     </Switch>
   </div>
