@@ -18,7 +18,6 @@ export const ChooseWhatToEatPage: React.FC = () => {
   };
   return (
     <div>
-      <PageHeader title="何食べたい？" />
       <FoodItemsList foodItems={foodItems} onClickFoodItem={onClickFoodItem} />
       <ChooseButtons />
     </div>
