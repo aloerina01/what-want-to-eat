@@ -3,7 +3,7 @@ import { IFoodItem } from '../models/IFoodItem';
 
 export type FoodItemProps = {
   foodItem: IFoodItem;
-  onClickFoodItem?: (itemId: string) => void;
+  onClickFoodItem?: (item: IFoodItem) => void;
 };
 
 export const liStyle: React.CSSProperties = {
@@ -50,7 +50,7 @@ export const itemLabelStyle: React.CSSProperties = {
 
 export const FoodItem: React.FC<FoodItemProps> = ({ foodItem, onClickFoodItem }) => {
   return (
-    <li style={liStyle} onClick={() => onClickFoodItem && onClickFoodItem(foodItem.id)}>
+    <li style={liStyle} onClick={() => onClickFoodItem && onClickFoodItem(foodItem)}>
       <div className="item-image-area" style={itemImageAreaStyle}>
         {foodItem.image ? (
           <img src={foodItem.image} alt={foodItem.name} style={itemImageStyle} />

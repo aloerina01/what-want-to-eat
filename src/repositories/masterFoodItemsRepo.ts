@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import { DB } from '../firebase';
 import { IFoodItem } from '../models/IFoodItem';
 

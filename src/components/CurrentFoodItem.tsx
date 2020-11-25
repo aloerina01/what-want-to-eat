@@ -10,7 +10,7 @@ import {
 
 export type CurrentFoodItemProps = {
   foodItem: ICurrentFoodItem;
-  onClickFoodItem?: (itemId: string) => void;
+  onClickFoodItem?: (item: ICurrentFoodItem) => void;
 };
 
 export const CurrentFoodItem: React.FC<CurrentFoodItemProps> = ({ foodItem, onClickFoodItem }) => {
@@ -20,7 +20,7 @@ export const CurrentFoodItem: React.FC<CurrentFoodItemProps> = ({ foodItem, onCl
     borderColor: foodItem.choosed ? '#C8E6C9' : '#eee',
   };
   return (
-    <li style={liStyle} onClick={() => onClickFoodItem && onClickFoodItem(foodItem.id)}>
+    <li style={liStyle} onClick={() => onClickFoodItem && onClickFoodItem(foodItem)}>
       <div className="item-image-area" style={choosedImageAreaStyle}>
         {foodItem.image ? (
           <img src={foodItem.image} alt={foodItem.name} style={itemImageStyle} />

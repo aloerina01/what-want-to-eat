@@ -1,25 +1,29 @@
-import React from 'react';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { choosedFoodItemIdsState, currentFoodItemsState } from '../states';
-import { PageHeader } from '../components/PageHeader';
+import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { currentFoodItemsState } from '../states';
 import { FoodItemsList } from '../components/FoodItemsList';
 import { ChooseButtons } from '../components/ChooseButtons';
+import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 
 export const ChooseWhatToEatPage: React.FC = () => {
-  const foodItems = useRecoilValue(currentFoodItemsState);
-  const setChoosedFoodItemIds = useSetRecoilState(choosedFoodItemIdsState);
-  const onClickFoodItem = (itemId: string) => {
-    setChoosedFoodItemIds((prevState) => {
-      if (prevState.includes(itemId)) {
-        return prevState.filter((each) => each !== itemId);
-      }
-      return [...prevState, itemId];
+  // prepare initialize value
+  const myChoosedFoodItemsFromDB = useRecoilValue(currentFoodItemsState);
+  // prepare localState (viewState)
+  const [myChoosedFoodItems, setMyChoosedFoodItems] = useState(myChoosedFoodItemsFromDB);
+  // define event handlers
+  const onClickFoodItem = (item: ICurrentFoodItem) => {
+    setMyChoosedFoodItems((prevState) => {
+      const targetIndex = prevState.indexOf(item);
+      const updateItem = { ...prevState[targetIndex] };
+      updateItem.choosed = !updateItem.choosed;
+      return [...prevState.slice(0, targetIndex), updateItem, ...prevState.slice(targetIndex + 1)];
     });
   };
+
   return (
     <div>
-      <FoodItemsList foodItems={foodItems} onClickFoodItem={onClickFoodItem} />
-      <ChooseButtons />
+      <FoodItemsList foodItems={myChoosedFoodItems} onClickFoodItem={onClickFoodItem} />
+      <ChooseButtons myChoosedFoodItems={myChoosedFoodItems} />
     </div>
   );
 };

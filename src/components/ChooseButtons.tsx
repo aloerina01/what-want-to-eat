@@ -1,8 +1,6 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { masterFoodItemsState } from '../states';
 import { useSubmissionWantToEat } from '../hooks/useSubmissionWantToEat';
-import { useRecoilValue } from 'recoil';
+import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 
 const ButtonsAreaStyle: React.CSSProperties = {
   display: 'flex',
@@ -23,16 +21,18 @@ const ButtonStyle: React.CSSProperties = {
   fontWeight: 800,
 };
 
-// type ChooseButtonsProps = {
-//   onClickWantToEat: () => void;
-// };
+type ChooseButtonsProps = {
+  myChoosedFoodItems: ICurrentFoodItem[];
+};
 
-export const ChooseButtons: React.FC = () => {
+export const ChooseButtons: React.FC<ChooseButtonsProps> = ({ myChoosedFoodItems }) => {
   const submitWantToEat = useSubmissionWantToEat();
   return (
     <div style={ButtonsAreaStyle}>
       <button
-        onClick={submitWantToEat}
+        onClick={() =>
+          submitWantToEat(myChoosedFoodItems.filter((item) => item.choosed).map((item) => item.id))
+        }
         style={{
           ...ButtonStyle,
           border: '2px solid #4CAF50',

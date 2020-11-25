@@ -6,7 +6,7 @@ import { CurrentFoodItem } from './CurrentFoodItem';
 
 export type FoodItemsListProps = {
   foodItems: ICurrentFoodItem[];
-  onClickFoodItem: (itemId: string) => void;
+  onClickFoodItem: (item: ICurrentFoodItem) => void;
 };
 
 const ulStyle: React.CSSProperties = {
