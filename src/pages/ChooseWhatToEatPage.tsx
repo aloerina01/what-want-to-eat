@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import { currentFoodItemsState } from '../states';
 import { FoodItemsList } from '../components/FoodItemsList';
@@ -21,9 +21,9 @@ export const ChooseWhatToEatPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <FoodItemsList foodItems={myChoosedFoodItems} onClickFoodItem={onClickFoodItem} />
       <ChooseButtons myChoosedFoodItems={myChoosedFoodItems} />
-    </div>
+    </Suspense>
   );
 };

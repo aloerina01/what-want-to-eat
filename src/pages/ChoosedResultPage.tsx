@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import { currentFoodItemsState } from '../states';
 import { FoodItem } from '../components/FoodItem';
@@ -6,7 +6,7 @@ import { FoodItem } from '../components/FoodItem';
 export const ChoosedResultPage: React.FC = () => {
   const foodItems = useRecoilValue(currentFoodItemsState);
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <ul>
         {foodItems
           .filter((foodItem) => foodItem.choosed)
@@ -14,6 +14,6 @@ export const ChoosedResultPage: React.FC = () => {
             <FoodItem key={`${index}_choosedItem`} foodItem={foodItem} />
           ))}
       </ul>
-    </div>
+    </Suspense>
   );
 };

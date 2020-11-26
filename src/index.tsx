@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
@@ -8,7 +8,9 @@ const rootElement = document.getElementById('root');
 render(
   <BrowserRouter>
     <RecoilRoot>
-      <App />
+      <Suspense fallback={<div>Loading...</div>}>
+        <App />
+      </Suspense>
     </RecoilRoot>
   </BrowserRouter>,
   rootElement

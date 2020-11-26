@@ -1,24 +1,20 @@
 import { selector } from 'recoil';
-import { masterFoodItemsState, choosedFoodItemIdsState } from '.';
+import { masterFoodItemsState, choosedFoodItemIdsState, userState } from '.';
 import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
-import { getDecodedIDToken } from '../liff';
-import { IChoosedFoodItemIdsRepo } from '../repositories/choosedFoodItemIdsRepo';
-
-const token = getDecodedIDToken();
 
 /**
  * masterFoodItemsStateとchoosedFoodItemIdsStateを突き合わせて、「選択中か否か」の情報をもたせたもの
  */
 export const currentFoodItemsState = selector<ICurrentFoodItem[]>({
   key: 'currentFoodItemsState',
-  get: ({ get }) =>
-    get(masterFoodItemsState).map((item) => {
-      const myChoosedItemId = get(choosedFoodItemIdsState).find(
-        (each) => each.userId === token?.sub
-      );
-      if (myChoosedItemId) {
-        return { ...item, choosed: myChoosedItemId.itemIds.includes(item.id) };
-      }
-      return { ...item, choosed: false };
-    }),
+  get: async ({ get }) => {
+    const user = get(userState);
+    const IDToken = await user.IDToken;
+    const choosedFoodItemIds = get(choosedFoodItemIdsState);
+    const myChoosedFoodItemId = choosedFoodItemIds.find((each) => each.userId === IDToken);
+    return get(masterFoodItemsState).map((item) => ({
+      ...item,
+      choosed: myChoosedFoodItemId ? myChoosedFoodItemId.itemIds.includes(item.id) : false,
+    }));
+  },
 });
