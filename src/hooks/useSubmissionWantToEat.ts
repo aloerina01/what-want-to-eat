@@ -25,21 +25,7 @@ export const useSubmissionWantToEat = () => {
       itemIds: myChoosedFoodItemIds,
     };
     // update DB
-    choosedFoodItemIdsRepo.add(newMyChoosedFoodItemId);
-    // update runtime state
-    const oldMyChoosedFoodItemIdIndex = choosedFoodItemIds.findIndex((item) => {
-      return item.userId === user.userId;
-    });
-    if (oldMyChoosedFoodItemIdIndex === -1) {
-      setChoosedFoodItemIds([...choosedFoodItemIds, newMyChoosedFoodItemId]);
-    } else {
-      setChoosedFoodItemIds([
-        ...choosedFoodItemIds.slice(0, oldMyChoosedFoodItemIdIndex),
-        newMyChoosedFoodItemId,
-        ...choosedFoodItemIds.slice(oldMyChoosedFoodItemIdIndex + 1),
-      ]);
-    }
-    // 画面遷移す
+    await choosedFoodItemIdsRepo.add(newMyChoosedFoodItemId);
     history.push('/choosedResult');
   };
 };

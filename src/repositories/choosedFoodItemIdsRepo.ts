@@ -1,3 +1,4 @@
+import firebase from 'firebase/app';
 import { DB } from '../firebase';
 import { IChoosedFoodItemId } from '../models/IChoosedFoodItemId';
 
@@ -6,6 +7,7 @@ const choosedFoodItemIdsRef = DB.collection('choosedFoodItemIds');
 export interface IChoosedFoodItemIdsRepo {
   add: (data: IChoosedFoodItemId) => Promise<void>;
   get: (date: string) => Promise<IChoosedFoodItemId[]>;
+  ref_HACK: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>;
 }
 
 export const choosedFoodItemIdsRepo: IChoosedFoodItemIdsRepo = {
@@ -26,4 +28,5 @@ export const choosedFoodItemIdsRepo: IChoosedFoodItemIdsRepo = {
     });
     return choosedFoodItemIds;
   },
+  ref_HACK: choosedFoodItemIdsRef,
 };
