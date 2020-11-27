@@ -1,5 +1,6 @@
 import React, { useState, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
+import { motion } from 'framer-motion';
 import { currentFoodItemsState } from '../states';
 import { FoodItemsList } from '../components/FoodItemsList';
 import { ChooseButtons } from '../components/ChooseButtons';
@@ -21,9 +22,25 @@ export const ChooseWhatToEatPage: React.FC = () => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <motion.section
+      animate={{
+        x: 0,
+        opacity: 1,
+      }}
+      initial={{
+        x: -100,
+        opacity: 0,
+      }}
+      exit={{
+        x: 100,
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.2,
+      }}
+    >
       <FoodItemsList foodItems={myChoosedFoodItems} onClickFoodItem={onClickFoodItem} />
       <ChooseButtons myChoosedFoodItems={myChoosedFoodItems} />
-    </Suspense>
+    </motion.section>
   );
 };
