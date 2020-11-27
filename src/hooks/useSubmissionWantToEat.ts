@@ -7,20 +7,20 @@ import { choosedFoodItemIdsState, userState } from '../states';
 export const useSubmissionWantToEat = () => {
   const history = useHistory();
   const [choosedFoodItemIds, setChoosedFoodItemIds] = useRecoilState(choosedFoodItemIdsState);
-  const [IDToken] = useRecoilValue(userState);
+  const user = useRecoilValue(userState);
 
   return async (myChoosedFoodItemIds: string[]) => {
     // validate
-    if (!IDToken || myChoosedFoodItemIds.length === 0) {
-      console.log('token', IDToken);
+    if (!user.userId || myChoosedFoodItemIds.length === 0) {
+      console.log('userId', user.userId);
       console.log('myChoosedFoodItemIds', myChoosedFoodItemIds);
       return;
     }
     // prepare data
     const today = getToday();
     const newMyChoosedFoodItemId = {
-      id: `${today}_${IDToken}`,
-      userId: IDToken,
+      id: `${today}_${user.userId}`,
+      userId: user.userId,
       date: today,
       itemIds: myChoosedFoodItemIds,
     };
@@ -28,7 +28,7 @@ export const useSubmissionWantToEat = () => {
     choosedFoodItemIdsRepo.add(newMyChoosedFoodItemId);
     // update runtime state
     const oldMyChoosedFoodItemIdIndex = choosedFoodItemIds.findIndex((item) => {
-      return item.userId === IDToken;
+      return item.userId === user.userId;
     });
     if (oldMyChoosedFoodItemIdIndex === -1) {
       setChoosedFoodItemIds([...choosedFoodItemIds, newMyChoosedFoodItemId]);

@@ -9,11 +9,11 @@ import { currentFoodItemsState, userState } from './states';
 
 export const App: React.FC = () => {
   const myChoosedFoodItems = useRecoilValue(currentFoodItemsState);
-  const [IDToken, decodedIDToken] = useRecoilValue(userState);
+  const user = useRecoilValue(userState);
   return (
     <div>
-      <PageHeader title="今日なに食べたい？" userIconImage={decodedIDToken?.picture} />
-      <AnimatePresence exitBeforeEnter>
+      <PageHeader title="今日なに食べたい？" userIconImage={user.pictureUrl} />
+      <AnimatePresence exitBeforeEnter initial={false}>
         <Switch>
           <Route path="/" exact>
             <ChooseWhatToEatPage />

@@ -16,6 +16,8 @@ const ButtonStyle: React.CSSProperties = {
   borderRadius: '30px',
   width: '45%',
   fontWeight: 800,
+  border: 'none',
+  outline:'none'
 };
 
 export type RemindButtonsProps = {

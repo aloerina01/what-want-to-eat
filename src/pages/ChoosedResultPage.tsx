@@ -20,7 +20,8 @@ export const ChoosedResultPage: React.FC = () => {
     }
     return itemIdMapByUser;
   });
-  const current = Object.keys(itemIdMapByUser).length;
+
+  const current = Object.keys(itemIdMapByUser).filter((userId) => !userId.includes('dummy')).length;
   const max = 2; // 決め打ち
   return (
     <motion.section

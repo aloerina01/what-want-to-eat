@@ -15,20 +15,15 @@ export const ready = () => {
   return liff.ready;
 };
 
-export const getIDToken = async () => {
-  await ready();
-  if (process.env.DEBUG === 'true') {
-    return process.env.ID;
-  }
-  return liff.getIDToken();
-};
-
-export const getDecodedIDToken = async () => {
+export const getProfile = async () => {
   await ready();
   if (process.env.DEBUG === 'true') {
     return {
-      picture: process.env.PROFILE_IMAGE,
+      userId: process.env.ID,
+      displayName: 'sample',
+      pictureUrl: process.env.PROFILE_IMAGE,
+      statusMessage: '',
     };
   }
-  return liff.getDecodedIDToken();
+  return await liff.getProfile();
 };
