@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HeaderWrapperStyle = {
+const HeaderWrapperStyle: React.CSSProperties = {
   height: '48px',
   width: '100%',
   backgroundColor: '#fff',
@@ -8,7 +8,7 @@ const HeaderWrapperStyle = {
   borderBottom: '1px solid #e8e8e8',
   position: 'relative',
 };
-const HeaderTitleStyle = {
+const HeaderTitleStyle: React.CSSProperties = {
   fontSize: '1rem',
   fontWeight: 800,
   padding: '13px 24px',
