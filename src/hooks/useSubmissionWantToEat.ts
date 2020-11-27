@@ -8,15 +8,16 @@ import { IChoosedFoodItemId } from '../models/IChoosedFoodItemId';
 export const useSubmissionWantToEat = () => {
   const history = useHistory();
   const [choosedFoodItemIds, setChoosedFoodItemIds] = useRecoilState(choosedFoodItemIdsState);
-  const user = useRecoilValue(userState);
+  const [IDToken] = useRecoilValue(userState);
 
   return async (myChoosedFoodItemIds: string[]) => {
-    const IDToken = await user.IDToken;
+    // validate
     if (!IDToken || myChoosedFoodItemIds.length === 0) {
       console.log('token', IDToken);
       console.log('myChoosedFoodItemIds', myChoosedFoodItemIds);
       return;
     }
+    // prepare data
     const today = getToday();
     const newMyChoosedFoodItemId = {
       id: `${today}_${IDToken}`,
@@ -24,16 +25,21 @@ export const useSubmissionWantToEat = () => {
       date: today,
       itemIds: myChoosedFoodItemIds,
     };
+    // update DB
     choosedFoodItemIdsRepo.add(newMyChoosedFoodItemId);
-    const newChoosedFoodItemIds: IChoosedFoodItemId[] = [];
-    choosedFoodItemIds.forEach((item) => {
-      if (item.userId === IDToken) {
-        newChoosedFoodItemIds.push(newMyChoosedFoodItemId);
-        return;
-      }
-      newChoosedFoodItemIds.push(item);
+    // update runtime state
+    const oldMyChoosedFoodItemIdIndex = choosedFoodItemIds.findIndex((item) => {
+      return item.userId === IDToken;
     });
-    setChoosedFoodItemIds(newChoosedFoodItemIds);
+    if (oldMyChoosedFoodItemIdIndex === -1) {
+      setChoosedFoodItemIds([...choosedFoodItemIds, newMyChoosedFoodItemId]);
+    } else {
+      setChoosedFoodItemIds([
+        ...choosedFoodItemIds.slice(0, oldMyChoosedFoodItemIdIndex),
+        newMyChoosedFoodItemId,
+        ...choosedFoodItemIds.slice(oldMyChoosedFoodItemIdIndex + 1),
+      ]);
+    }
     // 画面遷移す
     history.push('/choosedResult');
   };

@@ -1,5 +1,7 @@
 import { selector } from 'recoil';
-import { masterFoodItemsState, choosedFoodItemIdsState, userState } from '.';
+import { masterFoodItemsState } from './masterFoodItemsState';
+import { choosedFoodItemIdsState } from './choosedFoodItemIdsState';
+import { userState } from './userState';
 import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 
 /**
@@ -8,11 +10,14 @@ import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 export const currentFoodItemsState = selector<ICurrentFoodItem[]>({
   key: 'currentFoodItemsState',
   get: async ({ get }) => {
-    const user = get(userState);
-    const IDToken = await user.IDToken;
-    const choosedFoodItemIds = get(choosedFoodItemIdsState);
+    const masterFoodItems = get(masterFoodItemsState);
+    const choosedFoodItemIds = get(choosedFoodItemIdsState); // 今日、全てのユーザーによって選択されたFoodItemId
+    const [IDToken] = get(userState);
     const myChoosedFoodItemId = choosedFoodItemIds.find((each) => each.userId === IDToken);
-    return get(masterFoodItemsState).map((item) => ({
+
+    // warning
+    // get(masterFoodItemsState).map(省略) の書き方だとなぜかget(currentFoodItemsState)の値がPromiseのpending状態となり、無限ループが生まれる
+    return masterFoodItems.map((item) => ({
       ...item,
       choosed: myChoosedFoodItemId ? myChoosedFoodItemId.itemIds.includes(item.id) : false,
     }));

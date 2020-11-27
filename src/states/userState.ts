@@ -3,8 +3,5 @@ import { getDecodedIDToken, getIDToken } from '../liff';
 
 export const userState = atom({
   key: 'userState',
-  default: {
-    decodedIDToken: getDecodedIDToken(),
-    IDToken: getIDToken(),
-  },
+  default: Promise.all([getIDToken(), getDecodedIDToken()]),
 });
