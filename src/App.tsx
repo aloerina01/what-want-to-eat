@@ -1,17 +1,18 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { ChooseWhatToEatPage } from './pages/ChooseWhatToEatPage';
 import { ChoosedResultPage } from './pages/ChoosedResultPage';
 import { PageHeader } from './components/PageHeader';
-import { currentFoodItemsState } from './states';
-import { useRecoilValue } from 'recoil';
+import { currentFoodItemsState, userState } from './states';
 
 export const App: React.FC = () => {
   const myChoosedFoodItems = useRecoilValue(currentFoodItemsState);
+  const [IDToken, decodedIDToken] = useRecoilValue(userState);
   return (
     <div>
-      <PageHeader title="今日なに食べたい？" />
+      <PageHeader title="今日なに食べたい？" userIconImage={decodedIDToken?.picture} />
       <AnimatePresence exitBeforeEnter>
         <Switch>
           <Route path="/" exact>

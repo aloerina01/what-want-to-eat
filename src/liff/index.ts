@@ -26,7 +26,9 @@ export const getIDToken = async () => {
 export const getDecodedIDToken = async () => {
   await ready();
   if (process.env.DEBUG === 'true') {
-    return null;
+    return {
+      picture: process.env.PROFILE_IMAGE,
+    };
   }
   return liff.getDecodedIDToken();
 };
