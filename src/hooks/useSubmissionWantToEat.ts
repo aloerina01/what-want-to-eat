@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { choosedFoodItemIdsRepo } from '../repositories/choosedFoodItemIdsRepo';
 import { getToday } from '../utils/date';
 import { choosedFoodItemIdsState, userState } from '../states';
-import { IChoosedFoodItemId } from '../models/IChoosedFoodItemId';
 
 export const useSubmissionWantToEat = () => {
   const history = useHistory();
