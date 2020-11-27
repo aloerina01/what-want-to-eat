@@ -18,9 +18,15 @@ const ButtonStyle: React.CSSProperties = {
   fontWeight: 800,
 };
 
+export type RemindButtonsProps = {
+  isAllAnswered: boolean
+}
 
 
-export const RemindButtons: React.FC = () => {
+export const RemindButtons: React.FC<RemindButtonsProps> = ({ isAllAnswered }) => {
+  if (isAllAnswered) {
+    return null;
+  }
   const history = useHistory();
   return (
     <div style={ButtonsAreaStyle}>

@@ -11,7 +11,7 @@ export const App: React.FC = () => {
   const myChoosedFoodItems = useRecoilValue(currentFoodItemsState);
   return (
     <div>
-      <PageHeader title="今日何食べたい？" />
+      <PageHeader title="今日なに食べたい？" />
       <AnimatePresence exitBeforeEnter>
         <Switch>
           <Route path="/" exact>
