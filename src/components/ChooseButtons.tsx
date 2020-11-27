@@ -15,7 +15,6 @@ const ButtonsAreaStyle: React.CSSProperties = {
 };
 
 const ButtonStyle: React.CSSProperties = {
-  padding: '16px 24px',
   borderRadius: '30px',
   width: '45%',
   fontWeight: 800,
@@ -35,15 +34,20 @@ export const ChooseButtons: React.FC<ChooseButtonsProps> = ({ myChoosedFoodItems
         }
         style={{
           ...ButtonStyle,
-          border: '2px solid #4CAF50',
-          backgroundColor: '#4CAF50',
+          background:
+            'linear-gradient(90deg, rgba(114,255,169,1) 0%, rgba(47,233,160,1) 0%, rgba(0,135,147,1) 100%)',
           color: '#fff',
           marginRight: '10px',
+          padding: '17px 25px',
         }}
       >
         食べたい！
       </button>
-      <button style={{ ...ButtonStyle, border: '2px solid #4CAF50' }}>不要！</button>
+      <button
+        style={{ ...ButtonStyle, border: '2px solid #999', color: '#555', padding: '16px 24px' }}
+      >
+        不要！
+      </button>
     </div>
   );
 };

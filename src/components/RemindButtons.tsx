@@ -36,8 +36,7 @@ export const RemindButtons: React.FC<RemindButtonsProps> = ({ isAllAnswered }) =
         }
         style={{
           ...ButtonStyle,
-          border: '2px solid #4CAF50',
-          backgroundColor: '#4CAF50',
+          background: 'linear-gradient(90deg, rgba(114,255,169,1) 0%, rgba(47,233,160,1) 0%, rgba(0,135,147,1) 100%)',
           color: '#fff',
           marginBottom: '12px'
         }}
