@@ -10,14 +10,10 @@ import { ICurrentFoodItem } from '../models/ICurrentFoodItem';
 export const currentFoodItemsState = selector<ICurrentFoodItem[]>({
   key: 'currentFoodItemsState',
   get: async ({ get }) => {
-    const masterFoodItems = get(masterFoodItemsState);
     const choosedFoodItemIds = get(choosedFoodItemIdsState); // 今日、全てのユーザーによって選択されたFoodItemId
     const user = get(userState);
     const myChoosedFoodItemId = choosedFoodItemIds.find((each) => each.userId === user.userId);
-
-    // warning
-    // get(masterFoodItemsState).map(省略) の書き方だとなぜかget(currentFoodItemsState)の値がPromiseのpending状態となり、無限ループが生まれる
-    return masterFoodItems.map((item) => ({
+    return get(masterFoodItemsState).map((item) => ({
       ...item,
       choosed: myChoosedFoodItemId ? myChoosedFoodItemId.itemIds.includes(item.id) : false,
     }));
